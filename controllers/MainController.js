@@ -1,3 +1,5 @@
-class MainController {}
+class MainController {
+  
+}
 
 module.exports = MainController;

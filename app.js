@@ -2,25 +2,17 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const port = process.env.PORT || 4000;
+const app = express();
 
 const { connect } = require("./config/mongodb");
-const MainController = require('./controllers/MainController')
+const MainController = require("./controllers/MainController");
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/sum", MainController)
-app.get("/count", MainController)
-
-
-
-
-
-
-
-
-
-
+app.get("/sum", MainController);
+app.get("/count", MainController);
 
 connect().then(() => {
   app.listen(port, (_) => {
