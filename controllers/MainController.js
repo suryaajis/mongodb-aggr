@@ -34,7 +34,6 @@ class MainController {
         { $project: { _id: 0 } },
         { $unwind: "$customer_orders" },
         { $sort: { wallet: -1 } },
-        { $out: "newCollection" },
       ];
 
       const response = await userColl.aggregate(pipeline).toArray();
@@ -66,6 +65,45 @@ class MainController {
 
       const response = await userColl.aggregate(pipeline).toArray();
       res.status(200).json(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async newCollection(req, res) {
+    try {
+      const db = await connection();
+      const userColl = db.collection("users");
+
+      const pipeline = [
+        { $match: { wallet: { $gt: 60000 } } },
+        {
+          $lookup: {
+            from: "orders",
+            localField: "name",
+            foreignField: "customer",
+            pipeline: [
+              {
+                $lookup: {
+                  from: "products",
+                  localField: "product_name",
+                  foreignField: "name",
+                  as: "product_order",
+                },
+              },
+            ],
+            as: "customer_orders",
+          },
+        },
+        { $project: { _id: 0 } },
+        { $unwind: "$customer_orders" },
+        { $sort: { wallet: -1 } },
+        { $out: "newCollection" },
+      ];
+
+      const response = await userColl.aggregate(pipeline).toArray();
+
+      res.status(200).json({ message: "new collection has been added" });
     } catch (err) {
       console.log(err);
     }
