@@ -10,8 +10,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/sum", MainController);
-app.get("/count", MainController);
+app.get('/', MainController.readAllCollections)
+app.get('/users/orders', MainController.readUserOrders)
+app.get("/orders/quantity", MainController.readQuantity);
+app.get("/orders/totalPrice", MainController.readTotalPrice);
+app.get("/orders/bill", MainController.readBillOrders);
+
 
 connect().then(() => {
   app.listen(port, (_) => {
