@@ -55,6 +55,48 @@ const orders = [
     total_price: 15000,
     customer: "Aji"
   },
+  {
+    product_name: "Lemon",
+    quantity: 2,
+    total_price: 30000,
+    customer: "Rezy"
+  },
+  {
+    product_name: "Chili",
+    quantity: 2,
+    total_price: 20000,
+    customer: "Rezy"
+  },
+  {
+    product_name: "Lemon",
+    quantity: 5,
+    total_price: 75000,
+    customer: "Vira"
+  },
+  {
+    product_name: "Apple",
+    quantity: 3,
+    total_price: 75000,
+    customer: "Vira"
+  },
+  {
+    product_name: "Fresh Meat",
+    quantity: 5,
+    total_price: 225000,
+    customer: "Vira"
+  },
+  {
+    product_name: "Chili",
+    quantity: 10,
+    total_price: 100000,
+    customer: "Vira"
+  },
+  {
+    product_name: "Garlic",
+    quantity: 20,
+    total_price: 160000,
+    customer: "Vira"
+  },
 ];
 
 connect()

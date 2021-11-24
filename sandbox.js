@@ -9,6 +9,7 @@ const { connect, getDatabase } = require("./config/mongodb");
 // })
 // .then((data) => console.log(data))
 // .catch((err) => console.log(err))
+
 async function connection() {
   await connect();
   const db = await getDatabase();
@@ -50,4 +51,42 @@ const readTotalPrice = async () => {
     console.log(err);
   }
 };
-readTotalPrice();
+// readTotalPrice();
+
+const readUserAge = async () => {
+  try {
+    const db = await connection();
+    const userColl = db.collection("users");
+
+    const pipeline = [
+      { $match: {} },
+      { $group: { _id: { age: "$info.age", name: "$name" } } },
+      { $sort: { "_id.age": -1 } },
+      { $limit: 2 },
+    ];
+
+    const aggCursor = await userColl.aggregate(pipeline);
+    aggCursor.forEach((el) => console.log(el));
+  } catch (err) {
+    console.log(err);
+  }
+};
+// readUserAge();
+
+const readUserSpecifically = async () => {
+  try {
+    const db = await connection();
+    const userColl = db.collection("users");
+
+    const pipeline = [
+      { $unwind: "$info.hobby" },
+      { $project: { name: 1, email: 1, _id: 0, "info.age": 1, "info.hobby": 1 } },
+    ];
+
+    const aggCursor = await userColl.aggregate(pipeline);
+    aggCursor.forEach((el) => console.log(el));
+  } catch (err) {
+    console.log(err);
+  }
+};
+// readUserSpecifically();
