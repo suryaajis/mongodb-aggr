@@ -10,7 +10,9 @@
     "mongodb": "^4.2.0",
     "mongoose": "^6.0.13"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -20,12 +20,6 @@ const products = [
     category: "Protein",
   },
   {
-    name: "Salmon",
-    price: 35000,
-    stock: 15,
-    category: "Protein",
-  },
-  {
     name: "Shrimp",
     price: 10000,
     stock: 100,
@@ -35,12 +29,6 @@ const products = [
     name: "Garlic",
     price: 8000,
     stock: 200,
-    category: "Vegetable",
-  },
-  {
-    name: "Carrot",
-    price: 5000,
-    stock: 80,
     category: "Vegetable",
   },
   {
