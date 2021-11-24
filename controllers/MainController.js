@@ -34,6 +34,7 @@ class MainController {
         { $project: { _id: 0 } },
         { $unwind: "$customer_orders" },
         { $sort: { wallet: -1 } },
+        { $out: "newCollection" },
       ];
 
       const response = await userColl.aggregate(pipeline).toArray();
@@ -43,7 +44,7 @@ class MainController {
       console.log(err);
     }
   }
-  
+
   static async readUserOrders(req, res) {
     try {
       const db = await connection();
